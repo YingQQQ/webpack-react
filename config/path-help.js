@@ -1,3 +1,4 @@
+const path = require('path')
 const ROOT =path.resolve(__dirname,'..');
 const Public =path.resolve(ROOT,'public');
 const Isomorphic =path.resolve(ROOT,'public','assets');
