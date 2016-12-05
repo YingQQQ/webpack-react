@@ -7,5 +7,12 @@
     "plugins": [
         "transform-runtime",
         "react-hot-loader/babel"
-    ]
+    ],
+    "env": {
+        "start": {
+            "plugins": [
+                "typecheck"
+            ]
+        }
+    }
 }
