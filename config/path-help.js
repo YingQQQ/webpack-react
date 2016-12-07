@@ -1,21 +1,26 @@
 const path = require('path')
 const ROOT =path.resolve(__dirname,'..');
 const Public =path.resolve(ROOT,'public');
-const Isomorphic =path.resolve(ROOT,'public','assets');
-const Build =path.resolve(ROOT,'public','build');
+const Isomorphic =path.resolve(Public,'assets');
+const Build =path.resolve(Public,'build');
 const nodeModules =path.resolve(ROOT,'node_modules');
-const App =path.resolve(ROOT,'src');
-const Style =path.resolve(App,'style');
+const Client =path.resolve(ROOT,'src','client');
+const Server =path.resolve(ROOT,'src','server');
+const Style =path.resolve(Client,'static','css');
+const APP =path.resolve(ROOT,'src','client.js');
+const Views =path.resolve(Server,'index.ejs');
 
 
 const configPath ={
   ROOT:ROOT,
-  app:App,
+  app:APP,
+  client:Client,
   build:Build,
   style:[
     path.resolve(Style,'Main.scss')
   ],
-  Isomorphic:Isomorphic
+  isomorphic:Isomorphic,
+  views:Views
 }
 
 module.exports= configPath
