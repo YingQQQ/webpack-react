@@ -2,13 +2,13 @@ const merge = require('webpack-merge');
 const validate = require('webpack-validator');
 const Loaders = require('./loader');
 const common = require('./webpack.common');
-const PATHS = require('./path-help')
+const PATHS = require('./path-help');
 
-const TARGET = process.env.npm_lifecycle_event
+const TARGET = process.env.npm_lifecycle_event;
 process.env.BABEL_ENV = TARGET;
 
 var config;
-if (TARGET === 'start') {
+if (TARGET === 'dev') {
   config = merge(
     common, {
       devtool: 'eval-source-map',
@@ -16,6 +16,10 @@ if (TARGET === 'start') {
         style: PATHS.style
       }
     },
+    Loaders.devServer({
+        host: process.env.HOST,
+        port: process.env.PORT
+      }),
     Loaders.devLoaders(PATHS.style),
     Loaders.devPlugins()
   )

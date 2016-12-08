@@ -7,8 +7,37 @@ const webpackisomorphictoolsconfig = require('./webpack-isomorphic-tools-config'
 const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(
   webpackisomorphictoolsconfig
 );
+const PurifyCSSPlugin = require('purifycss-webpack-plugin');
 // const postcss = require('postcss')
+exports.devServer = function(options) {
+  const ret = {
+    devServer: {
+      historyApiFallback: true,
+      hot: true,
+      inline: true,
+      stats: 'errors-only',
 
+      host: options.host,
+      port: options.port
+    },
+    plugins: [
+      new webpack.HotModuleReplacementPlugin({
+        multiStep: true
+      })
+    ]
+  };
+
+  if(options.poll) {
+    ret.watchOptions = {
+      // Delay the rebuild after the first change
+      aggregateTimeout: 300,
+      // Poll using interval (in ms, accepts boolean too)
+      poll: 1000
+    };
+  }
+
+  return ret;
+}
 exports.commonLoaders = function(include) {
   return {
     module: {
@@ -94,7 +123,7 @@ exports.devPlugins = function() {
   return {
     plugins: [
       new webpack.optimize.OccurenceOrderPlugin(),
-      new webpack.HotModuleReplacementPlugin(),
+      // new webpack.HotModuleReplacementPlugin(),
       webpackIsomorphicToolsPlugin.development()
     ]
   };

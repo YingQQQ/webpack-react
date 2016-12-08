@@ -1,2 +1,3 @@
-config/*
+tools/*
 webpack.config.js
+tryServer.js

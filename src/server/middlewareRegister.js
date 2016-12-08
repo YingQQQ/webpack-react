@@ -1,8 +1,8 @@
 import serve from 'koa-static';
 import views from 'koa-views';
-import router from './routes';
 import bodyParser from 'koa-bodyparser';
-import PATHS from '../../config/path-help';
+import router from './routes';
+import PATHS from '../../tools/path-help';
 
 export default (app) => {
   // mongoose.connect('mongodb://localhost/blogData');

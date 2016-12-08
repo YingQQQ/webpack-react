@@ -3,36 +3,32 @@
 console.log('hello');
 require('../babelServer');
 
-const Koa = require('koa');
-const middleware = require('koa-webpack');
-const webpack = require('webpack');
-const PATHS = require('../config/path-help');
-const config = require('../config/webpack.development');
+// const Koa = require('koa');
+// const middleware = require('koa-webpack');
+// const webpack = require('webpack');
+const PATHS = require('../tools/path-help');
+// const config = require('../tools/webpack.development');
+// const middlewareRegister = require('../src/server/middlewareRegister');
 
-const app = new Koa();
+
+// const app = new Koa();
 
 const ROOT = PATHS.ROOT;
-const compiler = webpack(config);
+// const compiler = webpack(config);
 if (process.env.npm_lifecycle_event === 'start') {
   console.log('ok');
   process.env.NODE_ENV = 'development';
-  if (process.env.NODE_ENV === 'development') {
-    console.log('development');
-  }
 } else {
   console.log('not ok');
 }
 
+global.__DEVELOPMENT__ = process.env.NODE_ENV !== 'production';
+
 const WebpackIsomorphicTools = require('webpack-isomorphic-tools');
-const isomorphicConfig = require('../config/webpack-isomorphic-tools-config');
+const isomorphicConfig = require('../tools/webpack-isomorphic-tools-config');
 
 global.webpackIsomorphicTools = new WebpackIsomorphicTools(isomorphicConfig)
-  .development(process.env.NODE_ENV === 'development')
-  .server(ROOT, () => {
-    app.use(middleware({
-      compiler
-    }));
-    app.listen(3333, () => {
-      console.log('Port start at 3333');
-    });
+  .server(ROOT, function () {
+    console.log('into server');
+    require('../src/server.js');
   });
