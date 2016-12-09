@@ -23,4 +23,4 @@ const common = merge({
   })
 );
 
-module.exports= common
+module.exports= common;

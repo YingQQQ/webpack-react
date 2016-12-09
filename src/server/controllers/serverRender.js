@@ -24,14 +24,17 @@ export default async (ctx, next, renderProps) => {
       }
     }
   });
+  console.log('into serverRender');
+  console.log(__DEVELOPMENT__);
   await Promise.all(prefetchTasks);
   if (__DEVELOPMENT__) {
     webpackIsomorphicTools.refresh();
   }
   const assets = webpackIsomorphicTools.assets();
-  const scriptsIsomorphic = assets.javascript;
-  const cssIsomorphic = assets.styles;
-  console.log(assets);
+  const scriptsIsomorphic = assets.javascript || {};
+  const cssIsomorphic = assets.styles || {};
+
+
   await ctx.render('index', {
     title: 'Dome from Koa2',
     reduxData: store.getState(),

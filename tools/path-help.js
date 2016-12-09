@@ -8,7 +8,7 @@ const Client =path.resolve(ROOT,'src','client');
 const Server =path.resolve(ROOT,'src','server');
 const Style =path.resolve(Client,'static','css');
 const APP =path.resolve(ROOT,'src','client.js');
-const Views =path.resolve(Server,'index.ejs');
+const Views =path.resolve(Server,'views');
 
 
 const configPath ={
@@ -17,7 +17,7 @@ const configPath ={
   client:Client,
   build:Build,
   style:[
-    path.resolve(Style,'Main.scss')
+    path.resolve(Style,'Main.css')
   ],
   isomorphic:Isomorphic,
   views:Views

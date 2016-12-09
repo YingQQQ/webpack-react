@@ -11,6 +11,7 @@ export default (app) => {
   // db.once('open', function (callback) {
   //   console.log('mongodb is working')
   // });
+  console.log('into middlewareRegister');
   app.use(bodyParser());
   app.use(serve(PATHS.build));
   app.use(views(PATHS.views, {

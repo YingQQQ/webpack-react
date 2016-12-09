@@ -6,12 +6,11 @@ const PATHS = require('./path-help');
 
 const TARGET = process.env.npm_lifecycle_event;
 process.env.BABEL_ENV = TARGET;
-cons.log(TARGET)
-cons.log(process.env.BABEL_ENV)
+
 var config;
 
 
-if (TARGET === 'start') {
+if (TARGET === 'build') {
   config = merge(
     common, {
       devtool: 'source-map',
@@ -29,9 +28,9 @@ if (TARGET === 'start') {
       entries: ['react', 'react-dom']
     }),
     Loaders.prodLoaders(PATHS.style),
-    Loaders.prodPlugins([PATHS.build, PATHS.isomorphic], [PATHS.client], {
-      process.env.NODE_ENV: 'production'
-    })
+    Loaders.prodPlugins([PATHS.build, PATHS.isomorphic], [PATHS.client]),
+    Loaders.setFreeVariable('process.env.NODE_ENV',
+      'production')
   )
 } else {
   console.log('Please check your npm lifecycle')

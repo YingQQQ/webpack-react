@@ -4,8 +4,9 @@
   "description": "webpack react",
   "main": "webpack.config.js",
   "scripts": {
-    "start": "node ./bin/start",
-    "dev": "webpack-dev-server --config ./tools/webpack.development"
+    "dev": "node ./bin/start",
+    "start": "webpack-dev-server --config ./tools/webpack.development",
+    "build":"webpack --config ./tools/webpack.production"
   },
   "repository": {
     "type": "git",

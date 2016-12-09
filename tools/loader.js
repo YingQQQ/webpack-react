@@ -8,7 +8,7 @@ const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(
   webpackisomorphictoolsconfig
 );
 const PurifyCSSPlugin = require('purifycss-webpack-plugin');
-// const postcss = require('postcss')
+
 exports.devServer = function(options) {
   const ret = {
     devServer: {
@@ -107,7 +107,7 @@ exports.prodLoaders = function(include) {
 };
 
 
-exports.commonPlugins = function(options) {
+exports.commonPlugins = function (options) {
   return {
     plugins: [
       new HtmlWebpackPlugin({
@@ -116,20 +116,26 @@ exports.commonPlugins = function(options) {
         appMountId: options.appMountId,
         inject: false
       })
-    ]
+    ],
+    postcss: () => [
+      require('autoprefixer')({
+        browsers: ['last 4 versions', '> 4%'],
+      })
+    ],
   };
 };
+
 exports.devPlugins = function() {
   return {
     plugins: [
       new webpack.optimize.OccurenceOrderPlugin(),
-      // new webpack.HotModuleReplacementPlugin(),
+      new webpack.HotModuleReplacementPlugin(),
       webpackIsomorphicToolsPlugin.development()
     ]
   };
 };
 
-exports.prodPlugins = function(clean, Purify, FreeVariable) {
+exports.prodPlugins = function(clean, Purify) {
   return {
     plugins: [
       new CleanWebpackPlugin(clean, {
@@ -145,21 +151,20 @@ exports.prodPlugins = function(clean, Purify, FreeVariable) {
         basePath: process.cwd(),
         paths: Purify
       }),
-      new webpack.DefinePlugin(FreeVariable),
       webpackIsomorphicToolsPlugin
     ]
   };
 };
+exports.setFreeVariable = function(key, value) {
+  const env = {};
+  env[key] = JSON.stringify(value);
 
-// exports.setFreeVariable = function(key, value) {
-//   const env = {};
-//   env[key] = JSON.stringify(value);
-//   return {
-//     plugins: [
-//       new webpack.DefinePlugin(env)
-//     ]
-//   };
-// }
+  return {
+    plugins: [
+      new webpack.DefinePlugin(env)
+    ]
+  };
+}
 exports.extractBundle = function(options) {
   const entry = {};
   entry[options.name] = options.entries;

@@ -1,7 +1,7 @@
 body{
-  background: red;
-  color:black;
+  color:red;
 }
 h1{
   display: inline-flex;
+  font-size: 50px;
 }

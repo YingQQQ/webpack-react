@@ -15,7 +15,7 @@ const PATHS = require('../tools/path-help');
 
 const ROOT = PATHS.ROOT;
 // const compiler = webpack(config);
-if (process.env.npm_lifecycle_event === 'start') {
+if (process.env.npm_lifecycle_event === 'dev') {
   console.log('ok');
   process.env.NODE_ENV = 'development';
 } else {
