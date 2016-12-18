@@ -4,9 +4,9 @@
   "description": "webpack react",
   "main": "webpack.config.js",
   "scripts": {
-    "dev": "node ./bin/start",
-    "start": "webpack-dev-server --config ./tools/webpack.development",
-    "build":"webpack --config ./tools/webpack.production"
+    "start": "node ./webpack/dev.server.js",
+    "build": "webpack --config ./webpack/webpack.production",
+    "test": "node ./bin/test"
   },
   "repository": {
     "type": "git",
@@ -38,8 +38,10 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.8.0",
+    "eventsource-polyfill": "^0.9.6",
     "expose-loader": "^0.7.1",
     "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "^0.9.0",
     "html-webpack-plugin": "^2.24.1",
     "html-webpack-template": "^5.5.0",
     "koa-webpack": "^0.1.10",
@@ -52,13 +54,15 @@
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
     "webpack": "^1.13.3",
-    "webpack-dev-server": "^1.16.2",
+    "webpack-dev-middleware": "^1.8.4",
+    "webpack-hot-middleware": "^2.13.2",
     "webpack-isomorphic-tools": "^2.6.4",
     "webpack-merge": "^1.0.2",
     "webpack-validator": "^2.2.11"
   },
   "dependencies": {
     "babel-core": "^6.18.2",
+    "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-transform-async-to-generator": "^6.16.0",
     "babel-plugin-transform-runtime": "^6.15.0",
     "babel-polyfill": "^6.16.0",

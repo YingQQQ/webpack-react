@@ -7,7 +7,13 @@ const PATHS = require('./path-help');
 const TARGET = process.env.npm_lifecycle_event;
 process.env.BABEL_ENV = TARGET;
 
-console.log('webpack working on development')
+console.log('webpack development modole')
+const HMR ='webpack-hot-middleware/client?';
+
+// If you have several entry points in entry
+// configuration option, make sure HMR is in each of them
+// HRM fisrt in the array
+const style = [HMR].concat(PATHS.style);
 
 var config;
 if (TARGET === 'start') {
@@ -15,25 +21,20 @@ if (TARGET === 'start') {
     common, {
       devtool: 'eval-source-map',
       entry: {
-        style: PATHS.style
-      },
-      output: {
-        path: PATHS.build,
-        filename: '[name]-[hash].js',
-        chunkFilename: '[name]-[chunkhash].js'
+        app:[
+          'eventsource-polyfill',
+          HMR,
+          PATHS.app
+        ],
+        style:style
       }
     },
-    Loaders.devServer({
-      host: process.env.HOST,
-      port: process.env.PORT
-    }),
     Loaders.devLoaders(PATHS.style),
     Loaders.devPlugins()
   )
 }else{
   console.log('Please check your npm lifecycle')
 }
-
 
 module.exports = validate(config, {
   quiet: true

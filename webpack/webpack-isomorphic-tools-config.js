@@ -52,5 +52,5 @@ module.exports = {
       }
     }
   },
-  webpack_assets_file_path: 'public/assets/webpack-asset-manifest.json',
+  webpack_assets_file_path: 'dist/assets/webpack-asset-manifest.json',
 };

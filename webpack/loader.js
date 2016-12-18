@@ -38,7 +38,7 @@ exports.devServer = function(options) {
 
   return ret;
 }
-exports.commonLoaders = function(include) {
+exports.commonLoaders = function (include) {
   return {
     module: {
       loaders: [{
@@ -64,7 +64,12 @@ exports.commonLoaders = function(include) {
         test: webpackIsomorphicToolsPlugin.regular_expression('images'),
         loader: 'url-loader?limit=10240'
       }]
-    }
+    },
+    postcss: [
+       require('autoprefixer')({
+        browsers: ['last 2 versions'],
+      })
+    ]
   }
 }
 exports.commonPreloaders = function (include) {
@@ -84,7 +89,7 @@ exports.devLoaders = function (include) {
     module: {
       loaders: [{
         test: /\.s?css$/,
-        loader: 'style!css?modules&importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]!postcss?browsers=last 2 version!sass?outputStyle=expanded&sourceMap',
+        loader: 'style!css?modules&importLoaders=2&sourceMap&localIdentName=[local]___[hash:base64:5]!postcss!sass?outputStyle=expanded&sourceMap',
         include: include
       },{
         test: require.resolve('react'),
@@ -94,12 +99,12 @@ exports.devLoaders = function (include) {
   };
 };
 
-exports.prodLoaders = function(include) {
+exports.prodLoaders = function (include) {
   return {
     module: {
       loaders: [{
         test: /\.s?css$/,
-        loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=2&sourceMap!postcss?browsers=last 2 version!sass?outputStyle=expanded&sourceMap=true&sourceMapContents=true'),
+        loader: ExtractTextPlugin.extract('style', ['css?modules&importLoaders=1&sourceMap', 'postcss-loader', 'sass']),
         include: include
       }]
     }
@@ -114,14 +119,10 @@ exports.commonPlugins = function (options) {
         template: require('html-webpack-template'),
         title: options.title,
         appMountId: options.appMountId,
-        inject: false
+        inject: false,
+        filename: 'index.html',
       })
-    ],
-    postcss: () => [
-      require('autoprefixer')({
-        browsers: ['last 4 versions', '> 4%'],
-      })
-    ],
+    ]
   };
 };
 
@@ -129,7 +130,9 @@ exports.devPlugins = function() {
   return {
     plugins: [
       new webpack.optimize.OccurenceOrderPlugin(),
-      new webpack.HotModuleReplacementPlugin(),
+      new webpack.HotModuleReplacementPlugin({
+        multiStep: true
+      }),
       webpackIsomorphicToolsPlugin.development()
     ]
   };

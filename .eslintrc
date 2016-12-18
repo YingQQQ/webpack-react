@@ -24,7 +24,8 @@
     "object-shorthand":"off",
     "arrow-body-style":"off",
     "consistent-return":"off",
-    "prefer-arrow-callback":"off"
+    "prefer-arrow-callback":"off",
+    "no-restricted-syntax" :"off"
   },
   "plugins": [
     "react", "import"
