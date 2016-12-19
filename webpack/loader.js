@@ -9,35 +9,6 @@ const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(
 );
 const PurifyCSSPlugin = require('purifycss-webpack-plugin');
 
-exports.devServer = function(options) {
-  const ret = {
-    devServer: {
-      historyApiFallback: true,
-      hot: true,
-      inline: true,
-      stats: 'errors-only',
-
-      host: options.host,
-      port: options.port
-    },
-    plugins: [
-      new webpack.HotModuleReplacementPlugin({
-        multiStep: true
-      })
-    ]
-  };
-
-  if(options.poll) {
-    ret.watchOptions = {
-      // Delay the rebuild after the first change
-      aggregateTimeout: 300,
-      // Poll using interval (in ms, accepts boolean too)
-      poll: 1000
-    };
-  }
-
-  return ret;
-}
 exports.commonLoaders = function (include) {
   return {
     module: {
@@ -119,8 +90,7 @@ exports.commonPlugins = function (options) {
         template: require('html-webpack-template'),
         title: options.title,
         appMountId: options.appMountId,
-        inject: false,
-        filename: 'index.html',
+        inject: false
       })
     ]
   };
@@ -138,7 +108,7 @@ exports.devPlugins = function() {
   };
 };
 
-exports.prodPlugins = function(clean, Purify) {
+exports.prodPlugins = function(clean) {
   return {
     plugins: [
       new CleanWebpackPlugin(clean, {
@@ -150,10 +120,10 @@ exports.prodPlugins = function(clean, Purify) {
           warnings: false
         }
       }),
-      new PurifyCSSPlugin({
-        basePath: process.cwd(),
-        paths: Purify
-      }),
+      // new PurifyCSSPlugin({
+      //   basePath: process.cwd(),
+      //   paths: Purify
+      // }), //disabled wehen no anthoer styles
       webpackIsomorphicToolsPlugin
     ]
   };

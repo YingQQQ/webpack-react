@@ -4,26 +4,30 @@ require('../babelServer');
 const Koa = require('koa');
 const middleware = require('koa-webpack');
 const webpack = require('webpack');
-const devConfig = require('./webpack.development');
+const devConfig = require('../webpack.config');
 const middlewareRegister = require('../src/server/middlewareRegister');
 const compiler = webpack(devConfig);
 const app = new Koa();
 const PATHS = require('./path-help');
-global.__DEVELOPMENT__ = process.env.npm_lifecycle_event === 'start';
-console.log(__DEVELOPMENT__)
 
-const hotConfig = {
+const dev = {
   noInfo: true,
   quiet: true,
   publicPath: devConfig.output.publicPath,
   stats: {
     colors: true
   }
-}
+}; //webpack-dev-middleware config if you need
+
+const hot ={
+
+}//webpack-hot-middleware config if you need
+
 app.use(middleware({
-  compiler,
-  hotConfig
-}))
+  compiler: compiler,
+  dev: dev,
+  hot:hot
+}));
 
 middlewareRegister(app);
 

@@ -2,13 +2,13 @@
     "presets": ["react", "es2015", "stage-0"],
     "plugins": [
         "transform-runtime",
-        "add-module-exports",
-        "react-hot-loader/babel"
+        "add-module-exports"
     ],
     "env": {
         "start": {
             "plugins": [
-                "typecheck"
+                "typecheck",
+                "react-hot-loader/babel"
             ]
         }
     }

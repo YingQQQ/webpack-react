@@ -1,4 +1,4 @@
-import router from './serverApi';
+import router from './api';
 import reactRender from './reactRender';
 
 export default async (ctx, next) => {

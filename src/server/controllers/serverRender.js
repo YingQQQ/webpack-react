@@ -14,17 +14,7 @@ const store = configureStore();
 
 export default async (ctx, next, renderProps) => {
   let prefetchTasks = [];
-  // renderProps.components.forEach((component) => {
-  //   if (component && component.WrappedComponent && component.WrappedComponent.fetch) {
-  //     const _tasks = component.WrappedComponent.fetch(store.getState(), store.dispatch);
-  //     if (Array.isArray(_tasks)) {
-  //       prefetchTasks = prefetchTasks.concat(_tasks);
-  //     } else if (_tasks.then) {
-  //       prefetchTasks.push(_tasks);
-  //     }
-  //   }
-  // });
-  for (const component of renderProps.components) {
+  renderProps.components.forEach((component) => {
     if (component && component.WrappedComponent && component.WrappedComponent.fetch) {
       const _tasks = component.WrappedComponent.fetch(store.getState(), store.dispatch);
       if (Array.isArray(_tasks)) {
@@ -33,7 +23,17 @@ export default async (ctx, next, renderProps) => {
         prefetchTasks.push(_tasks);
       }
     }
-  }
+  });
+  // for (const component of renderProps.components) {
+  //   if (component && component.WrappedComponent && component.WrappedComponent.fetch) {
+  //     const _tasks = component.WrappedComponent.fetch(store.getState(), store.dispatch);
+  //     if (Array.isArray(_tasks)) {
+  //       prefetchTasks = prefetchTasks.concat(_tasks);
+  //     } else if (_tasks.then) {
+  //       prefetchTasks.push(_tasks);
+  //     }
+  //   }
+  // }
   console.log('into serverRender');
   console.log(__DEVELOPMENT__);
   await Promise.all(prefetchTasks);
