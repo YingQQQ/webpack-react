@@ -1,15 +1,7 @@
 import React from 'react';
 
-// class App extends Component {
-//   render() {
-//     return (
-//       <h1>hello world</h1>
-//     );
-//   }
-// }
-const App = () => {
+export default() => {
   return (
-    <h1>hello world!!</h1>
+    <h1>hello world</h1>
   );
 };
-export default App;

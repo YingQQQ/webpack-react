@@ -3,16 +3,17 @@ const merge = require('webpack-merge');
 const Loaders = require('./loader');
 const PATHS = require('./path-help');
 const HMR ='webpack-hot-middleware/client?';
-
+const RHL3 ='webpack/hot/only-dev-server'
 // If you have several entry points in entry
-// configuration option, make sure HMR is in each of them and first
-const styles = [HMR].concat(PATHS.style);
+// configuration option, make sure HMR is in each of them
+const styles = [HMR,RHL3].concat(PATHS.style);
 
 let development = merge({
     devtool: 'eval-source-map',
     entry: {
       app: [
-          'eventsource-polyfill',
+          'react-hot-loader/patch',
+          RHL3,
           HMR,
           PATHS.app
         ],
