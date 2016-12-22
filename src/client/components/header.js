@@ -1,9 +1,7 @@
 import React from 'react';
 
-const header = () => {
+export default () => {
   return (
-    <h1>hello world!!</h1>
+    <h1>This is headerNav</h1>
   );
 };
-
-export default header;

@@ -5,7 +5,8 @@
   "main": "webpack.config.js",
   "scripts": {
     "start": "node ./bin/start",
-    "build": "webpack"
+    "build": "webpack",
+    "prod": "node ./src/server/index"
   },
   "repository": {
     "type": "git",
@@ -52,7 +53,7 @@
     "sass-loader": "^4.0.2",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
-    "webpack": "^1.13.3",
+    "webpack": "^1.14.0",
     "webpack-dev-middleware": "^1.8.4",
     "webpack-hot-middleware": "^2.13.2",
     "webpack-isomorphic-tools": "^2.6.4",

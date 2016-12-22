@@ -5,13 +5,13 @@ import routes from './routes';
 const Root = ({ store }) => {
   return (
     <Provider store={store}>
-      { routes }
+      {routes}
     </Provider>
   );
 };
 Root.propTypes = {
   store: PropTypes.shape({
-    // getStore: PropTypes.func.isRequired,
+    getState: PropTypes.func.isRequired,
     dispatch: PropTypes.func.isRequired,
     subscribe: PropTypes.func.isRequired,
     replaceReducer: PropTypes.func.isRequired

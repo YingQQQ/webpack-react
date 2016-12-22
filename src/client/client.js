@@ -9,12 +9,13 @@ if (process.env.NODE_ENV !== 'production') {
   React.Perf = require('react-addons-perf');
 }
 const store = configureStore(window.__REDUX_STATE__);
+const rootEl = window.document.getElementById('app');
 
 render(
   <AppContainer>
     <Root store={store} />
   </AppContainer>,
-    document.getElementById('app')
+    rootEl
 );
 
 // HRL3
@@ -26,7 +27,7 @@ if (module.hot) {
       <AppContainer>
         <RootNext store={store} />
       </AppContainer>,
-      document.getElementById('app')
+        rootEl
     );
   });
 }

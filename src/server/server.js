@@ -1,5 +1,5 @@
 import Koa from 'koa';
-import middlewareRegister from './server/middlewareRegister';
+import middlewareRegister from './middlewareRegister';
 
 const app = new Koa();
 middlewareRegister(app);
