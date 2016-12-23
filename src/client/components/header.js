@@ -1,7 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 export default () => {
   return (
-    <h1>This is headerNav</h1>
+    <div>
+      <Link to="/">Home</Link>
+      <Link to="/about">About</Link>
+      <h1>sssddd</h1>
+    </div>
   );
 };

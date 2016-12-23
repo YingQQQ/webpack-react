@@ -13,9 +13,9 @@ let development = merge({
     devtool: 'eval-source-map',
     entry: {
       app: [
+        'webpack-hot-middleware/client?',
         'react-hot-loader/patch',
         'webpack/hot/only-dev-server',
-        'webpack-hot-middleware/client?',
           PATHS.app
         ],
       style: styles

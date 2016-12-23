@@ -1,20 +1,25 @@
 import React from 'react';
-import { Router, Route, browserHistory } from 'react-router';
+import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import App from './containers/App';
 import Home from './containers/Home';
+import About from './containers/About';
 
-
-export default(
+let routes = (
   <Router history={browserHistory}>
     <Route path="/" component={App}>
-      <Route path="accounts" component={Home} />
+      <IndexRoute component={Home} />
+      <Route path="/about" component={About} />
     </Route>
   </Router>
 );
-// <IndexRoute
-//   getComponent={(nextState, cb) => {
-//     require.ensure([], (require) => {
-//       cb(null, require('./containers/Home'));
-//     }, 'home');
-//   }}
-//   />
+if (module.hot) {
+  const oldRoutes = module.hot.data && module.hot.data.routes;
+  if (oldRoutes) {
+    routes = oldRoutes;
+  }
+  module.hot.dispose((data) => {
+    data.routes = routes;
+  });
+}
+
+export default routes;

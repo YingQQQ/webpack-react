@@ -25,7 +25,9 @@
     "arrow-body-style":"off",
     "consistent-return":"off",
     "prefer-arrow-callback":"off",
-    "no-restricted-syntax" :"off"
+    "no-restricted-syntax" :"off",
+    "no-param-reassign":"off",
+    "import/no-mutable-exports":"off"
   },
   "plugins": [
     "react", "import"

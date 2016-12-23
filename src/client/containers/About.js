@@ -4,7 +4,7 @@ import React from 'react';
 export default() => {
   return (
     <div>
-      <h1>Thie is HomePage!!</h1>
+      <h1>This is AboutPage</h1>
     </div>
   );
 };
