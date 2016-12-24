@@ -4,7 +4,7 @@
   "description": "webpack react",
   "main": "webpack.config.js",
   "scripts": {
-    "start": "node ./bin/start",
+    "start": "node ./webpack/dev.server",
     "build": "webpack",
     "prod": "node ./src/server/index"
   },

@@ -12,6 +12,7 @@ let routes = (
     </Route>
   </Router>
 );
+// RHL3
 if (module.hot) {
   const oldRoutes = module.hot.data && module.hot.data.routes;
   if (oldRoutes) {

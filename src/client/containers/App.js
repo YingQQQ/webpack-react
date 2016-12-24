@@ -1,12 +1,23 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 
-import Header from '../components/header';// component name must uppercase
+import Header from '../components/header';
 
-export default () => {
-  return (
-    <div>
-      <Header />
-      <h1>This is AppPage!!</h1>
-    </div>
-  );
+class App extends Component {
+  componentDidMount() {
+    console.log('into App');
+  }
+  render() {
+    return (
+      <div>
+        <Header />
+        <h1>AppDome</h1>
+        {this.props.children}
+      </div>
+    );
+  }
+}
+App.propTypes = {
+  children: PropTypes.shape()
 };
+
+export default App;
